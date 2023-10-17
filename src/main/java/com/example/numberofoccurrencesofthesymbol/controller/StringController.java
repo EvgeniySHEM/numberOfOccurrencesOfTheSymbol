@@ -22,21 +22,22 @@ public class StringController {
     }
 
     @GetMapping(value = {"/{str}", "/"})
-    public String analysisString(@PathVariable Optional <String> str) {
+    public ResponseEntity<String> analysisString(@PathVariable Optional<String> str) {
 
         if (str.isPresent()) {
-            if(str.get().isBlank()) {
+            if (str.get().isBlank()) {
                 throw new BlankLineException("The string must not be empty");
             }
-            return stringService.characterOccurrenceAnalysis(str.get());
+            return new ResponseEntity<>(stringService.characterOccurrenceAnalysis(str.get()),
+                    HttpStatus.OK);
         } else {
-            return "Line missing";
+            return new ResponseEntity<>("Line missing", HttpStatus.BAD_REQUEST);
         }
     }
 
     @ExceptionHandler
-    public ResponseEntity<String> handleException(BlankLineException exception) {
-        
+    private ResponseEntity<String> handleException(BlankLineException exception) {
+
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
