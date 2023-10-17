@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class StringControllerTest {
 
     private final String INPUTSTRING = "aaabbccccc";
-    private final String OUTPUTSTRING = "b:2,a:3,c:5";
+    private final String OUTPUTSTRING = "\"b\":2,\"a\":3,\"c\":5";
     @Autowired
     private MockMvc mvc;
     @MockBean

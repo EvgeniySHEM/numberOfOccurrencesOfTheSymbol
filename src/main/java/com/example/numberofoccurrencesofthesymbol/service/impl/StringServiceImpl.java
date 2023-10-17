@@ -26,6 +26,6 @@ public class StringServiceImpl implements StringService {
             sb.append(String.format("\"%s\":%d,", entry.getKey(), entry.getValue()));
         }
 
-        return sb.toString();
+        return sb.substring(0, sb.length() - 1);
     }
 }
